@@ -1,0 +1,15 @@
+// Creating the table that stores codes.
+CREATE TABLE `authenticator`.`active_codes` (
+  `code_id` INT NOT NULL AUTO_INCREMENT,
+  `code` INT NOT NULL,
+  `email` VARCHAR(254) NOT NULL,
+  `expires_at` DATETIME NOT NULL,
+  PRIMARY KEY (`code_id`));
+
+  // Creating the log table for codes that expired.
+  CREATE TABLE `authenticator`.`invalid_codes` (
+    `invalid_code_id` INT NOT NULL AUTO_INCREMENT,
+    `code` INT NOT NULL,
+    `email` VARCHAR(254) NOT NULL,
+    `invalidated_at` DATETIME NOT NULL,
+    PRIMARY KEY (`invalid_code_id`));
