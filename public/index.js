@@ -1,6 +1,7 @@
 window.onload = function(){
     document.getElementById("verify-email-view").hidden = true;
     document.getElementById("welcome-view").hidden = true;
+    document.getElementById("error-view").hidden = true;
 }
 
 addEventListener("DOMContentLoaded", ()=>{
@@ -15,7 +16,6 @@ addEventListener("DOMContentLoaded", ()=>{
             userEmail = userEmail + "@gmail.com"
         }
         console.log(userEmail);
-
         try{
             const response = await fetch('http://localhost:8080/auth/request',{
                 method : 'POST',
@@ -26,9 +26,29 @@ addEventListener("DOMContentLoaded", ()=>{
                     email : userEmail
                 })
             });
+            console.log("Status code:", response.status);
+
+            // TODO: Redirect user to the verification screen if server succeeded to do the previous tasks.
+            console.log("I am now checking if status is 200");
+            if(response.status === 200){
+                console.log("Status ISSS 200");
+                document.getElementById("get-email-view").hidden = true;
+                document.getElementById("verify-email-view").hidden = false;
+            }else{
+                console.log("Status is NOT 200");
+                document.getElementById("get-email-view").hidden = true;
+                document.getElementById("error-view").hidden = false;
+            }
         }catch(err){
             console.log(err);
         }
+
+    })
+})
+
+addEventListener("DOMContentLoaded", async()=>{
+    document.getElementById("get-code").addEventListener("click", async()=>{
+        
     })
 })
 

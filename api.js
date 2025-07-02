@@ -32,12 +32,13 @@ app.post('/auth/request', async(req, res)=>{
         )
     }catch(err){
         console.log(err);
-        res.status(500);
+        res.sendStatus(500);
     }
 
     // TODO: Send email to users email.
     sendEmailHelper(email, code);
-    res.status(200);
+    console.log("I am setting the response status to 200");
+    res.sendStatus(200);
 })
 
 app.listen(8080, ()=>{
